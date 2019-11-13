@@ -13,7 +13,7 @@
       <v-toolbar-title>
         <v-btn class="title hidden-sm-and-down"
                color="text"
-               text>{{ appTitle }}</v-btn>
+               text>{{ this.$configService.get('title') }}</v-btn>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -22,13 +22,13 @@
         <v-btn text
                class="login-btn"
                id="nav-logout"
-               @click="$keycloak.logoutFn">Logout</v-btn>
+               @click="logout">Logout</v-btn>
       </div>
       <v-btn v-else
              class="login-btn"
              text
              id="nav-login"
-             @click="$keycloak.loginFn">Login</v-btn>
+             @click="login">Login</v-btn>
     </v-toolbar>
   </header>
 </template>
@@ -44,6 +44,15 @@ export default {
   computed: {
   },
   methods: {
+    login() {
+      const loginUrl = this.$keycloak.createLoginUrl();
+      window.location.replace(loginUrl);
+    },
+    logout() {
+      const redirectUri = `${location.origin}${process.env.BASE_URL}`;
+      const logoutUrl = this.$keycloak.createLogoutUrl({redirectUri: redirectUri});
+      window.location.replace(logoutUrl);
+    }
   }
 };
 </script>

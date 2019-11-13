@@ -23,4 +23,4 @@ yarn-error.log*
 *.sw?
 
 # output of shell command
-keycloak-config.json
+runtime-config.json

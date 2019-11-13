@@ -1,0 +1,34 @@
+*:{$FRONTEND_PORT} {
+    # Redirect to our actual app code, hitting the root server
+    redir / {scheme}://{host}{$PATH_ROOT}/
+    log stdout
+    errors stdout
+}
+
+*:{$FRONTEND_PORT}/ {
+    # Redirect to our actual app code, hitting the root server
+    redir / {scheme}://{host}{$PATH_ROOT}/
+    log stdout
+    errors stdout
+}
+
+*:{$FRONTEND_PORT}{$PATH_ROOT} {
+    # requests without trailing slash don't load our app.
+    redir / {uri}/
+    log stdout
+    errors stdout
+}
+
+*:{$FRONTEND_PORT}{$PATH_ROOT}/ {
+    # Huzzah, our actual application, load our static files.
+    root {$STATIC_FILES_PATH}
+    log stdout
+    errors stdout
+}
+
+*:{$FRONTEND_PORT}/* {
+    # Anything else that is hitting the server root/port, let's redirect into the app.
+    redir / {scheme}://{host}{$PATH_ROOT}/
+    log stdout
+    errors stdout
+}

@@ -29,6 +29,15 @@ describe('Header.vue', () => {
       }
     });
 
+    // need to add in our config service
+    Object.defineProperty(localVue.prototype, '$configService', {
+      get () {
+        return {
+          get: (v) => { return `Value of ${v}`; }
+        };
+      }
+    });
+
     wrapper = mount(Header, {
       localVue,
       vuetify,
