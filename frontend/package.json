@@ -16,7 +16,7 @@
     "config:gen": "chmod +x ./runtime-config.sh && ./runtime-config.sh && cp -rf runtime-config.json ./public/"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "core-js": "^3.3.2",
     "keycloak-js": "6.0.1",
     "vue": "^2.6.10",
